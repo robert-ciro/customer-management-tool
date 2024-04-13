@@ -21,5 +21,7 @@ CREATE TABLE Tasks (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Description NVARCHAR(1000),
 	CreationDate DATETIME,
-	Solved BIT
+	Solved BIT,
+	CustomerId INT,
+	FOREIGN KEY (CustomerID) REFERENCES Customer(Id)
 );
