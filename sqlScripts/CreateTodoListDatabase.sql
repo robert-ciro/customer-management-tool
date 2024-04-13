@@ -15,6 +15,8 @@ CREATE TABLE Contacts (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Type VARCHAR(10),
 	Value VARCHAR(100)
+	CustomerId INT NULL,
+	FOREIGN KEY (CustomerID) REFERENCES Customer(Id)
 );
 
 CREATE TABLE Tasks (
