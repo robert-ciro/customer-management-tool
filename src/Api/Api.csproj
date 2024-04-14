@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Adapters\ClassLibrary1\Adapters.csproj" />
+    <ProjectReference Include="..\Adapters\Adapters.csproj" />
     <ProjectReference Include="..\Applications\Applications\Application.csproj" />
   </ItemGroup>
 

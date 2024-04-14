@@ -5,8 +5,12 @@ using Ardalis.GuardClauses;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -15,8 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TodoDb>(options => options.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB;Database=ToDoList;Integrated Security=True"))
                 .AddScoped<ITodoDbContext>(provider => provider.GetRequiredService<TodoDb>());
 
-builder.Services
-                .AddApplicationServices()
+builder.Services.AddApplicationServices()
                 .AddProblemDetails(setup =>
                 {
                     setup.CustomizeProblemDetails = (context =>
@@ -62,7 +65,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
-    app.UseExceptionHandler();
+    app.UseDeveloperExceptionPage();
 else
     app.UseExceptionHandler();
 
