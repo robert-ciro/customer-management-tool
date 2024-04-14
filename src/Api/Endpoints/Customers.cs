@@ -1,9 +1,11 @@
 ﻿using Api.Infrastructure;
 using Application.Customers.CreateCustomer;
 using Application.Customers.DeleteCustomer;
+using Application.Customers.Queries;
 using Application.Customers.UpdateCustomer;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Immutable;
 
 namespace Api.Endpoints;
 
@@ -19,7 +21,8 @@ public class Customers : EndpointGroupBase
         var group = app.MapGroup(this)
             .MapPost(CreateCustomer)
             .MapPut(UpdateCustomer, "{id}")
-            .MapDelete(DeleteCustomer, "{id}");
+            .MapDelete(DeleteCustomer, "{id}")
+            .MapGet(FindCustomers);
     }
 
     public static Task<int> CreateCustomer(
@@ -49,4 +52,9 @@ public class Customers : EndpointGroupBase
 
         return Results.NoContent();
     }
+
+    public async static Task<ImmutableArray<CustomerResponse>> FindCustomers(
+     [AsParameters] GetCustomersWithPaginationQuery parameters,
+     [FromServices] ISender sender,
+      CancellationToken token) => await sender.Send(parameters, token);
 }
