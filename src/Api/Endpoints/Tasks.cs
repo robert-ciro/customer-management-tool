@@ -1,4 +1,5 @@
 ﻿using Api.Infrastructure;
+using Application.Tasks.MarkTaskStatus;
 using Application.Tasks.CreateTask;
 using Application.Tasks.DeleteTaks;
 using Application.Tasks.UpdateTask;
@@ -13,7 +14,8 @@ public class Tasks : EndpointGroupBase
     {
         var group = app.MapGroup(this)
             .MapPost(CreateTask)
-            .MapPut(UpdateTask, "{id}");
+            .MapPut(UpdateTask, "{id:int}")
+            .MapPost(MarkTaskStatus, "{id:int}/{state:alpha}");
     }
 
     public static Task<int> CreateTask(
@@ -41,6 +43,16 @@ public class Tasks : EndpointGroupBase
     {
         await sender.Send(new DeleteTaskRequest(id), token);
 
+        return Results.NoContent();
+    }
+
+    public static async Task<IResult> MarkTaskStatus(
+     [FromRoute] int id,
+     [FromRoute] StateTask state,
+     [FromServices] ISender sender,
+      CancellationToken token)
+    {
+        await sender.Send(new MarkTaskStatusRequest(state, id), token);
         return Results.NoContent();
     }
 }
