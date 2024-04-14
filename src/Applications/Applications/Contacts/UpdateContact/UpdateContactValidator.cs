@@ -1,13 +1,13 @@
 ﻿using static Application.Common.Validators;
 
-namespace Application.Contacts.CreateContact;
+namespace Application.Contacts.UpdateContact;
 
-public class CreateContactValidator : AbstractValidator<CreateContactRequest>
+public class UpdateContactValidator : AbstractValidator<UpdateContactRequest>
 {
-    public CreateContactValidator()
+    public UpdateContactValidator()
     {
         RuleFor(v => v.Value)
-            .NotEmpty();
+           .NotEmpty();
 
         RuleFor(contact => contact.Value)
             .Must(IsPhone)
