@@ -16,7 +16,7 @@ public sealed record UpdateContactRequest(
 
 public class UpdateContactHandler(ITodoDbContext context) : IRequestHandler<UpdateContactRequest>
 {
-    public async Task Handle(UpdateContactRequest request, CancellationToken cancellationToken)
+    public async System.Threading.Tasks.Task Handle(UpdateContactRequest request, CancellationToken cancellationToken)
     {
         var contact = await context.Contacts
                                     .Where(c => c.Id == request.Id)

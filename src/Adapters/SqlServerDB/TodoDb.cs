@@ -11,6 +11,7 @@ public class TodoDb : DbContext, ITodoDbContext
 
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<Contact> Contacts => Set<Contact>();
+    public DbSet<Domain.Entities.Task> Tasks => Set<Domain.Entities.Task>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,6 +28,12 @@ public class TodoDb : DbContext, ITodoDbContext
         modelBuilder.Entity<Contact>()
                     .Property(e => e.Type)
                     .HasConversion<string>();
+
+        modelBuilder.Entity<Domain.Entities.Task>()
+                   .HasKey(c => c.Id);
+
+        modelBuilder.Entity<Domain.Entities.Task>()
+                    .HasOne(x => x.Customer);
     }
 }
 
