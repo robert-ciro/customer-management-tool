@@ -7,7 +7,7 @@ public sealed record UpdateCustomerRequest(
     DateTime BirthDay
 ) : IRequest;
 
-public class CreateTodoListCommandHandler(ITodoDbContext context) : IRequestHandler<UpdateCustomerRequest>
+public class UpdateCustomerHandler(ITodoDbContext context) : IRequestHandler<UpdateCustomerRequest>
 {
     public async Task Handle(UpdateCustomerRequest request, CancellationToken cancellationToken)
     {

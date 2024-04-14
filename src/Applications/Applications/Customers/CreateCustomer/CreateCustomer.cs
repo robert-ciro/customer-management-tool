@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using MediatR;
 
 namespace Application.Customers.CreateCustomer;
 
@@ -9,7 +8,7 @@ public sealed record CreateCustomerRequest(
     DateTime BirthDay
 ) : IRequest<int>;
 
-public class CreateTodoListCommandHandler(ITodoDbContext context) : IRequestHandler<CreateCustomerRequest, int>
+public class CreateCustomerHandler(ITodoDbContext context) : IRequestHandler<CreateCustomerRequest, int>
 {
     public async Task<int> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
     {

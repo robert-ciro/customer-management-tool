@@ -1,12 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Application.Customers.DeleteCustomer;
+﻿namespace Application.Customers.DeleteCustomer;
 
 public sealed record DeleteCustomerRequest(
     int Id
 ) : IRequest;
 
-public class CreateTodoListCommandHandler(ITodoDbContext context) : IRequestHandler<DeleteCustomerRequest>
+public class DeleteCustomerHandler(ITodoDbContext context) : IRequestHandler<DeleteCustomerRequest>
 {
     public async Task Handle(DeleteCustomerRequest request, CancellationToken cancellationToken)
     {
