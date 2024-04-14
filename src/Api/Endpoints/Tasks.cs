@@ -1,5 +1,6 @@
 ﻿using Api.Infrastructure;
 using Application.Tasks.CreateTask;
+using Application.Tasks.DeleteTaks;
 using Application.Tasks.UpdateTask;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,16 @@ public class Tasks : EndpointGroupBase
         if (id != request.Id) return Results.BadRequest();
 
         await sender.Send(request, token);
+
+        return Results.NoContent();
+    }
+
+    public static async Task<IResult> DeleteTask(
+     [FromRoute] int id,
+     [FromServices] ISender sender,
+     CancellationToken token)
+    {
+        await sender.Send(new DeleteTaskRequest(id), token);
 
         return Results.NoContent();
     }
