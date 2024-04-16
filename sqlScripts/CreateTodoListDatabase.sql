@@ -17,7 +17,7 @@ CREATE TABLE Contacts (
 	Type VARCHAR(10) NOT NULL,
 	Value VARCHAR(100) NOT NULL,
 	CustomerId INT NOT NULL,
-	FOREIGN KEY (CustomerID) REFERENCES Customers(Id)
+	CONSTRAINT FK_Customers_Contacts FOREIGN KEY (CustomerID) REFERENCES Customers(Id)
 );
 
 CREATE TABLE Tasks (
@@ -26,5 +26,5 @@ CREATE TABLE Tasks (
 	CreationDate DATETIME NOT NULL,
 	Solved BIT NOT NULL,
 	CustomerId INT NOT NULL,
-	FOREIGN KEY (CustomerID) REFERENCES Customers(Id)
+	CONSTRAINT FK_Customers_Tasks FOREIGN KEY (CustomerID) REFERENCES Customers(Id)
 );

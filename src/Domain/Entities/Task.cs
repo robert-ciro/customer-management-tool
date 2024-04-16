@@ -7,4 +7,6 @@ public class Task
     public required DateTime CreationDate { get; set; }
     public bool Solved { get; set; }
     public required Customer Customer { get; set; }
+
+    public int CustomerId { get; set; }
 }

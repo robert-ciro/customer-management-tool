@@ -13,4 +13,5 @@ public class Contact
     public required TypeEnum Type { get; set; }
     public required string Value { get; set; }
     public required Customer Customer { get; set; }
+    public int CustomerId { get; set; }
 }

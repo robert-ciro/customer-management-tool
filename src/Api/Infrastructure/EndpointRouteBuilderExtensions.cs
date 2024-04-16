@@ -28,7 +28,7 @@ public static class IEndpointRouteBuilderExtensions
         return builder;
     }
 
-    public static IEndpointRouteBuilder MapDelete(this IEndpointRouteBuilder builder, Delegate handler, [StringSyntax("Route")] string pattern)
+    public static IEndpointRouteBuilder MapDelete(this IEndpointRouteBuilder builder, Delegate handler, [StringSyntax("Route")] string pattern = "")
     {
         builder.MapDelete(pattern, handler)
             .WithName(handler.Method.Name);
