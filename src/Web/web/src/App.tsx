@@ -1,55 +1,32 @@
-import { useState } from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import DataSample from './components/DataSample'
+import TodoList from './components/TodoList'
 import axios from 'axios';
 
 import './App.css';
+import ListCustomers from './components/ListCustomers';
+
+axios.defaults.baseURL = 'https://localhost:7179/api/';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 function App() {
-    const [dataCreated, setDataCreated] = useState<boolean>(false);
-    const [dataRemoved, setDataRemoved] = useState<boolean>(false);
-    const [showLoading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
-
-    const handleCreateData = async () => {
-        try {
-            setLoading(true);
-            setDataRemoved(false);
-            await axios.post('https://localhost:7179/api/sample-data');
-            setDataCreated(true);
-            setError('');
-        } catch (error: unknown) {
-            // Handle error response
-            setDataCreated(false);
-
-            setError('Failed to create data: ' + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleRemoveData = async ()  => {
-        try {
-            setLoading(true);
-            setDataRemoved(false);
-
-            await axios.delete('https://localhost:7179/api/sample-data');
-            setDataRemoved(true);
-            setError('');
-        } catch (error: unknown) {
-            setDataRemoved(false);
-            setError('Failed to delete data: ' + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     return (
         <div>
-            <button onClick={handleCreateData}>Create Data Sample</button>
-            <button onClick={handleRemoveData}>Remove All Data</button>
-            {dataCreated && !dataRemoved && <p>Data has been created!</p>}
-            {dataRemoved && <p>Data has been removed!</p>}
-            {error && <p>{error}</p>}
-            {showLoading && <p>Waiting a response from the server...</p>}
+            <nav>
+                <ul>
+                    <li><a href="/sample-data">Sample Data</a></li>
+                    <li><a href="/tasks">Tasks</a></li>
+                    <li><a href="/customers">Customers</a></li>
+                </ul>
+            </nav>
+
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/sample-data" Component={DataSample} />
+                    <Route path="/tasks" Component={TodoList} />
+                    <Route path="/customers" Component={ListCustomers} />
+                </Routes>
+            </BrowserRouter>
         </div>
     );
 }

@@ -15,7 +15,8 @@ public class Tasks : EndpointGroupBase
         var group = app.MapGroup(this)
             .MapPost(CreateTask)
             .MapPut(UpdateTask, "{id:int}")
-            .MapPost(MarkTaskStatus, "{id:int}/{state:alpha}");
+            .MapPost(MarkTaskStatus, "{id:int}/{state:alpha}")
+            .MapDelete(DeleteTask, "{id:int}");
     }
 
     public static Task<int> CreateTask(

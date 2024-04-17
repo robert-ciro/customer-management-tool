@@ -17,3 +17,14 @@ th, td {
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.todo-item .done {
+    color: #888;
+    text-decoration: line-through;
+}
