@@ -21,7 +21,7 @@ public class UpdateContactValidator : AbstractValidator<UpdateContactRequest>
 
         RuleFor(contact => contact.Value)
             .Must(IsWeb)
-            .WithMessage("The provided value must be a valid email.")
+            .WithMessage("The provided value must be a valid web.")
             .When(customer => customer.Type == Domain.Entities.TypeEnum.Web);
     }
 }
