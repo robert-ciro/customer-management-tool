@@ -41,7 +41,8 @@ function TodoList() {
         await axios.delete<number>(`/tasks/${id}`);
 
     }
-    const toggleCompleted = async  (id: number) => {
+    const toggleCompleted = async (id: number) => {
+
         setTasks(tasks.map(task => {
             if (task.id === id) {
                 return { ...task, solved: !task.solved };
@@ -51,7 +52,11 @@ function TodoList() {
         }));
 
         const task = tasks.find(task => task.id == id);
-        const status = task?.solved == true ? 'Solve' : 'Unresolved';
+
+        if (task == null)
+        return;
+
+        const status = !task.solved == true ? 'Solve' : 'Unresolved';
         await axios.post<number>(`/tasks/${id}/${status}/`);
     }
     return (
