@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Customer from '../models/Customer';
+import Customer from '../../models/Customer';
 import CustomerItem from './CustomerItem';
 
 function ListCustomers() {

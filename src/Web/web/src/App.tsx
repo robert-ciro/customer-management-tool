@@ -1,10 +1,10 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import DataSample from './components/DataSample'
-import TodoList from './components/TodoList'
+import TodoList from './components/Todo/TodoList'
 import axios from 'axios';
 
 import './App.css';
-import ListCustomers from './components/ListCustomers';
+import ListCustomers from './components/CustomerItem/ListCustomers';
 import Contacts from './components/Contacts/Contacts';
 
 axios.defaults.baseURL = 'https://localhost:7179/api/';
